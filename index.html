@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        background-color: blue;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <!-- 這裡可以加入一些內容 -->
+    </div>
+    <br> <!-- 加入一個換行符或其他內容 -->
+    <div id="weatherImage"></div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        async function fetchData() {
+            try {
+                const response = await axios.get('https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-EBDD970B-60A8-41FC-9B88-6982746FADEC&locationName=%E8%87%BA%E5%8C%97%E5%B8%82');
+                console.log(response.data);
+                const weatherDescription = response.data.records.location[0].weatherElement[0].time[0].parameter.parameterValue
+                const weathertime = response.data.records.location[0].weatherElement[0].time[0].endTime
+                console.log(weatherDescription);
+                console.log(weathertime);
+                weatherImage.innerHTML = changeImg(weatherDescription, weathertime);
+
+
+            } catch (error) {
+                console.error('Error fetching data', error);
+            }
+        }
+
+        function changeImg(weatherDescription, weathertime) {
+            const sun1 = 1
+            const sun2 = 24
+            const sun = [sun1, sun2]
+            console.log(sun);
+
+            const sunPartlyCloudy1 = [2, 3, 4]
+            const sunPartlyCloudy2 = [25, 26, 27]
+            const sunPartlyCloudy = sunPartlyCloudy1.concat(sunPartlyCloudy2)
+            console.log(sunPartlyCloudy);
+
+            const cloudy1 = [5, 6, 7]
+            const cloudy2 = 28
+            const cloudy = cloudy1.concat(cloudy2)
+            console.log(cloudy);
+
+            const raining = [...Array.from({ length: 7 }, (_, i) => i + 8), 30, 32, 38, 39]
+            console.log(raining);
+            // ??
+
+            const rainingThunder = [...Array.from({ length: 3 }, (_, i) => i + 15), 34, 36, 41]
+            const sunRining = [19, 20, 29, 31]
+            const sunRiningThunder = [21, 22]
+            const rainingSnow = [23, 37]
+            const snow = 42
+            const sunRainingThunder = [33, 35]
+
+            console.log(weathertime);
+
+            if (weatherDescription = raining && weathertime.concat("6:00")) {
+                return '<img src="cloudy.png">'
+            }
+
+
+            // if (weathertime === '1' || weathertime === '2') {
+            //     return '<img src="cloudy.png" alt="sun-cloudy">'
+            // } else if (weathertime === '1' || weathertime === '2' || weathertime === '3') {
+            //     return '<img src="cloudy.png" alt="cloudy">'
+            // } else {
+            //     return '<img src="cloudy.png" alt="rainy">'
+            // }
+
+
+
+        }
+
+
+
+        // function changeImg(weatherDescription) {
+        //     const sun = []
+        //     if (weatherDescription === '多雲時晴' || weatherDescription === '晴時多雲') {
+        //         return '<img src="cloudy.png" alt="sun-cloudy">'
+        //     } else if (weatherDescription === '多雲' || weatherDescription === '陰時多雲' || weatherDescription === '多雲時陰') {
+        //         return '<img src="cloudy.png" alt="cloudy">'
+        //     } else {
+        //         return '<img src="cloudy.png" alt="rainy">'
+        //     }
+        // }
+
+
+        // let weatherImage = document.getElementById('weatherImage');
+
+
+
+        // 在這裡呼叫 fetchData 函式
+        fetchData();
+
+
+    </script>
+</body>
+
+</html>
