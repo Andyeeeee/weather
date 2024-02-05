@@ -18,6 +18,7 @@
     </div>
     <br> <!-- 加入一個換行符或其他內容 -->
     <div id="weatherImage"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         async function fetchData() {
@@ -58,7 +59,7 @@
 
             const rainingThunder = [...Array.from({ length: 3 }, (_, i) => i + 15), 34, 36, 41]
             const sunRining = [19, 20, 29, 31]
-            const sunRiningThunder = [21, 22]
+            const sunRainingThunderChange = [21, 22]
             const rainingSnow = [23, 37]
             const snow = 42
             const sunRainingThunder = [33, 35]
